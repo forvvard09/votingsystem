@@ -17,7 +17,7 @@ public class Main {
                 new Menu("Омлет", 8900)
         );
 
-        Restaurant restaurant = new Restaurant("Теплица", LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), menuList);
+        Restaurant restaurant = new Restaurant(99,"Теплица", LocalDateTime.of(2020, Month.JANUARY, 30, 10, 0), menuList);
         restaurant.setMenuItem(new Menu("Салат Цезарь", 14300));
     }
 }
