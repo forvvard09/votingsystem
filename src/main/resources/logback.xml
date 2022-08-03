@@ -24,6 +24,9 @@
 
     <root level="DEBUG">
         <appender-ref ref="file"/>
+    </root>
+
+    <root level="INFO">
         <appender-ref ref="console"/>
     </root>
 
