@@ -1,44 +1,79 @@
 package com.forvvard09.votingsystem.model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Restaurant {
-    private final int id;
-    private  final String name;
-    private final LocalDateTime dateTimeTo;
+
+    private Integer id;
+    private final String name;
     private final int countLikes;
-    private final List<Menu> listMenu = new ArrayList<>();
+    private final LocalDateTime dateTimeEditMenu;
+    private final Map<Integer, MenuItem> mapMenu;
+
+    private final AtomicInteger counter = new AtomicInteger(0);
 
 
-    /*
-    public Restaurant() {
-
+    public Restaurant(LocalDateTime dateTimeTo) {
+        this(null, null, dateTimeTo, 0);
     }
 
-    public Restaurant(String name) {
-        this(name, );
+    public Restaurant(String name, LocalDateTime dateTimeTo) {
+        this(null, name, dateTimeTo, 0);
     }
-     */
 
-    public Restaurant(int id, String name, LocalDateTime dateTimeTo, List<Menu> listMenu) {
-        Objects.requireNonNull(name, "name must not be null");
-        Objects.requireNonNull(id, "id must not be null");
-        Objects.requireNonNull(dateTimeTo, "dateTimeTo must not be null");
+    public Restaurant(Integer id, String name, LocalDateTime dateTimeEditMenu, Integer countLikes) {
+        //Objects.requireNonNull(name, "name must not be null");
+        Objects.requireNonNull(dateTimeEditMenu, "dateTimeTo must not be null");
         this.id = id;
         this.name = name;
-        this.dateTimeTo = dateTimeTo;
-        this.countLikes = 0;
-        this.listMenu.addAll(listMenu);
+        this.countLikes = countLikes;
+        this.dateTimeEditMenu = dateTimeEditMenu;
+        this.mapMenu = new ConcurrentHashMap<>();
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setMenuItem(Menu menu) {
-        this.listMenu.add(menu);
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getCountLikes() {
+        return countLikes;
+    }
+
+    public LocalDateTime getDateTimeEditMenu() {
+        return dateTimeEditMenu;
+    }
+
+    public Map<Integer, MenuItem> getMapMenu() {
+        return Collections.unmodifiableMap(this.mapMenu);
+    }
+
+    public void addItemMenu(MenuItem menu) {
+        this.mapMenu.put(generateIdItem(), menu);
+    }
+
+    public boolean isNew() {
+        return id == null;
+    }
+
+    private int generateIdItem() {
+        return counter.incrementAndGet();
+    }
+
+    public void listMenuToMap(List<MenuItem> listMenuItems) {
+        for(MenuItem item : listMenuItems) {
+            addItemMenu(item);
+        }
     }
 }

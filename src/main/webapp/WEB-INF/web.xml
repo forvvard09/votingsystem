@@ -7,14 +7,36 @@
     <display-name>VotingSystem</display-name>
 
     <servlet>
-        <servlet-name>restaurantServlet</servlet-name>
-        <servlet-class>com.forvvard09.votingsystem.web.RestaurantServlet</servlet-class>
+        <servlet-name>restaurantsServlet</servlet-name>
+        <servlet-class>com.forvvard09.votingsystem.web.RestaurantsServlet</servlet-class>
         <load-on-startup>0</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>restaurantServlet</servlet-name>
+        <servlet-name>restaurantsServlet</servlet-name>
         <url-pattern>/restaurants</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>usersServlet</servlet-name>
+        <servlet-class>com.forvvard09.votingsystem.web.UsersServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>usersServlet</servlet-name>
+        <url-pattern>/users</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>restaurantForm</servlet-name>
+        <servlet-class>com.forvvard09.votingsystem.web.RestaurantFormServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>restaurantForm</servlet-name>
+        <url-pattern>/restaurantForm</url-pattern>
     </servlet-mapping>
 
 
